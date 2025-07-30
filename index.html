@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RMS Supporting Application</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+     <script>
+        if (!localStorage.getItem("isLoggedIn")) {
+            window.location.href = "login.html";
+        }
+    </script>
+    <div class="container">
+        <div class="header">
+            <h1>RMS Supporting Application</h1>
+            <button id="logout-btn" class="logout-btn">Logout</button>
+            <!-- <p class="subtitle">Real-time ip status monitoring across all sites</p> -->
+        </div>
+
+        <div class="dashboard-header">
+            <div class="title-section">
+                <!-- <h2>Site IP Status</h2> -->
+                <p id="last-updated"><b>Last updated: </b> --</p>
+            </div>
+            <button id="refresh-btn" class="refresh-btn">
+                <span class="refresh-icon">↻</span>
+                Refresh
+            </button>
+        </div>
+
+        <div class="datatable-controls">
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search sites..." class="search-input">
+                <span class="search-icon">🔍</span>
+            </div>
+            <div class="filter-container">
+                <button id="filter-btn" class="filter-btn">
+                    <span class="filter-icon">⚗️</span>
+                    Filter
+                </button>
+                <div id="filter-dropdown" class="filter-dropdown" style="display: none;">
+                    <div class="filter-header">Gateway Type</div>
+                    <label><input type="checkbox" value="all" checked> All Types</label>
+                    <div id="gateway-filters"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="loading" class="loading-card">
+            <div class="loading-content">
+                <span class="loading-spinner">↻</span>
+                <span>Loading ip status...</span>
+            </div>
+        </div>
+
+        <div id="error" class="error-card" style="display: none;">
+            <div class="error-content">
+                <span>Failed to load ip status. Please try again.</span>
+            </div>
+        </div>
+
+        <div id="table-container" class="table-container" style="display: none;">
+            <div class="table-wrapper">
+                <table id="status-table">
+                    <thead>
+                        <tr>
+                            <th>Site Name</th>
+                            <th>Site Code</th>
+                            <th>Gateway Type</th>
+                            <th>Aggregator</th>
+                            <th>Cabin A Controller</th>
+                            <th>Cabin B Controller</th>
+                            <th>Router</th>
+                            <th>POC3</th>
+                            <th>Alive Signal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="pagination-container">
+            <div class="pagination-info">
+                <span id="entries-info">Showing 0 to 0 of 0 entries</span>
+            </div>
+            <div class="pagination-controls">
+                <button id="prev-btn" class="pagination-btn" disabled>Previous</button>
+                <div id="page-numbers" class="page-numbers"></div>
+                <button id="next-btn" class="pagination-btn" disabled>Next</button>
+            </div>
+            <!-- <div class="entries-per-page">
+                <select id="entries-select" class="entries-select">
+                    <option value="1" selected>1</option>
+                    <option value="2">2</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                </select>
+                <span>entries per page</span>
+            </div> -->
+        </div>
+    </div>
+
+    <!-- Enhanced Tooltip -->
+    <div id="tooltip" class="tooltip" style="display: none;">
+        <div class="tooltip-arrow"></div>
+        <div class="tooltip-content">
+            <div class="tooltip-title"></div>
+            <div class="tooltip-details">
+                <div class="tooltip-status"></div>
+                <div class="tooltip-pinged"></div>
+                <div class="tooltip-hash"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="script.js"></script>
+     <script>
+        // Check if user is logged in (using localStorage)
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!localStorage.getItem('isLoggedIn')) {
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+</body>
+</html>

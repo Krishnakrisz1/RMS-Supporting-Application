@@ -86,7 +86,7 @@ class DeviceStatusApp {
         
         try {
             // API endpoint for site device status
-            const response = await fetch('https://localhost:44325/api/Sites/SiteIPStatus', {
+            const response = await fetch('http://localhost:8091/api/Sites/SiteIPStatus', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
